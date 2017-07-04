@@ -7,6 +7,7 @@ git 'https://github.com/jruby/activerecord-jdbc-adapter.git', branch: 'rails-5' 
   gem 'activerecord-jdbc-adapter'
   gem 'activerecord-jdbcmysql-adapter'
   gem 'activerecord-jdbcpostgresql-adapter'
+  gem 'listen'
 end
 
 group :local do
