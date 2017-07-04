@@ -3,9 +3,11 @@
 source "http://rubygems.org"
 
 gem "rails", "~> 5.0"
-gem 'activerecord-jdbc-adapter', github: "jruby/activerecord-jdbc-adapter", branch: 'rails-5'
-gem 'activerecord-jdbcmysql-adapter', github: "jruby/activerecord-jdbc-adapter", branch: 'rails-5'
-gem 'activerecord-jdbcpostgresql-adapter', github: "jruby/activerecord-jdbc-adapter", branch: 'rails-5'
+git 'https://github.com/jruby/activerecord-jdbc-adapter.git', branch: 'rails-5' do
+  gem 'activerecord-jdbc-adapter'
+  gem 'activerecord-jdbcmysql-adapter'
+  gem 'activerecord-jdbcpostgresql-adapter'
+end
 
 group :local do
   gem "pry"
