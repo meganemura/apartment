@@ -3,7 +3,7 @@
 source "http://rubygems.org"
 
 gem "rails", "~> 5.0"
-git 'https://github.com/jruby/activerecord-jdbc-adapter.git', branch: 'rails-5' do
+git 'https://github.com/jruby/activerecord-jdbc-adapter.git', ref: 'e582fbe' do
   gem 'activerecord-jdbc-adapter'
   gem 'activerecord-jdbcmysql-adapter'
   gem 'activerecord-jdbcpostgresql-adapter'
