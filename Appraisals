@@ -17,4 +17,5 @@ end
 
 appraise "rails-5-0" do
   gem "rails", "~> 5.0"
+  gem 'activerecord-jdbcsqlite3-adapter', git: 'https://github.com/jruby/activerecord-jdbc-adapter.git', branch: 'rails-5'
 end
