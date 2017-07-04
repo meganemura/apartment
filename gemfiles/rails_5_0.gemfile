@@ -7,8 +7,8 @@ git 'https://github.com/jruby/activerecord-jdbc-adapter.git', ref: 'e582fbe' do
   gem 'activerecord-jdbc-adapter'
   gem 'activerecord-jdbcmysql-adapter'
   gem 'activerecord-jdbcpostgresql-adapter'
-  gem 'listen'
 end
+gem 'listen'
 
 group :local do
   gem "pry"
