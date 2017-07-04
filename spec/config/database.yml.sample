@@ -3,7 +3,10 @@ connections:
   postgresql:
     adapter: postgresql
     database: apartment_postgresql_test
+    host: localhost
+    port: 5432
     username: postgres
+    password:
     min_messages: WARNING
     driver: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/apartment_postgresql_test
@@ -13,7 +16,10 @@ connections:
   mysql:
     adapter: mysql
     database: apartment_mysql_test
+    host: localhost
+    port: 3306
     username: root
+    password:
     min_messages: WARNING
     driver: com.mysql.jdbc.Driver
     url: jdbc:mysql://localhost:3306/apartment_mysql_test

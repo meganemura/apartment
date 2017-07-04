@@ -12,3 +12,11 @@ services:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
     ports:
       - "3306:3306"
+  jruby:
+    build:
+      dockerfile: docker/jruby/Dockerfile
+      context: .
+    links:
+      - postgresql
+      - mysql
+    command: /app/docker/jruby/entry-point-jruby.sh
