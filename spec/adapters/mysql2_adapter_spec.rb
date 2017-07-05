@@ -2,7 +2,7 @@ require 'spec_helper'
 require 'apartment/adapters/mysql2_adapter'
 
 describe Apartment::Adapters::Mysql2Adapter, database: :mysql do
-  unless defined?(JRUBY_VERSION)
+  return if defined?(JRUBY_VERSION)
 
     subject(:adapter){ Apartment::Tenant.mysql2_adapter config }
 
@@ -55,5 +55,4 @@ describe Apartment::Adapters::Mysql2Adapter, database: :mysql do
       it_should_behave_like "a generic apartment adapter able to handle custom configuration"
       it_should_behave_like "a connection based apartment adapter"
     end
-  end
 end
