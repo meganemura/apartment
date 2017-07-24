@@ -6,10 +6,10 @@ module Apartment
 
     TASKS = %w(
               db:migrate
-              db:rollback
               db:migrate:up
               db:migrate:down
               db:migrate:redo
+              db:rollback
               db:seed
             )
 
