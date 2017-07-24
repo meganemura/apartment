@@ -31,6 +31,38 @@ apartment_namespace = namespace :apartment do
     apartment_namespace[:drop].invoke
   end
 
+  desc "Reset all tenants"
+  task :reset do
+    tenants.each do |tenant|
+      puts("Resetting #{tenant} tenant")
+      begin
+        Apartment::Tenant.drop(tenant)
+      rescue Apartment::TenantNotFound => e
+        puts e.message
+        break
+      end
+
+      begin
+        Apartment::Tenant.create(tenant)
+      rescue Apartment::TenantExists => e
+        puts e.message
+        break
+      end
+
+      begin
+        Apartment::Migrator.migrate(tenant)
+      rescue Apartment::TenantNotFound => e
+        puts e.message
+        break
+      end
+    end
+  end
+
+  task :_reset do
+    next unless Apartment.tenants_depend_on_db
+    apartment_namespace[:reset].invoke
+  end
+
   desc "Migrate all tenants"
   task :migrate do
     warn_if_tenants_empty

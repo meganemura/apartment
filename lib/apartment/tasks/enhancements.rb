@@ -15,6 +15,7 @@ module Apartment
 
     PRE_TASKS = %w(
                   db:drop
+                  db:reset
                 )
 
     # This is a bit convoluted, but helps solve problems when using Apartment within an engine
