@@ -15,7 +15,7 @@ module Apartment
 
     # This is a bit convoluted, but helps solve problems when using Apartment within an engine
     # See spec/integration/use_within_an_engine.rb
-    
+
     class << self
       def enhance!
         TASKS.each do |name|
@@ -27,16 +27,16 @@ module Apartment
           end
         end
       end
-    
+
       def should_enhance?
         Apartment.db_migrate_tenants
       end
-    
+
       def enhance_task(task)
         Rake::Task[task.name.sub(/db:/, 'apartment:')].invoke
       end
     end
-    
+
   end
 end
 
