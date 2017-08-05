@@ -17,6 +17,7 @@ module Apartment
         config.seed_after_create = false
         config.prepend_environment = false
         config.append_environment = false
+        config.tenants_depend_on_db = false
       end
 
       ActiveRecord::Migrator.migrations_paths = Rails.application.paths['db/migrate'].to_a
