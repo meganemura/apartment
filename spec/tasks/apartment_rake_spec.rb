@@ -15,6 +15,8 @@ describe "apartment rake tasks" do
     Rake::Task.define_task('db:migrate:up')
     Rake::Task.define_task('db:migrate:down')
     Rake::Task.define_task('db:migrate:redo')
+    Rake::Task.define_task('db:drop')
+    Rake::Task.define_task('db:reset')
   end
 
   after do
@@ -28,13 +30,40 @@ describe "apartment rake tasks" do
 
   let(:version){ '1234' }
 
-  context 'database migration' do
+  context 'database operations' do
 
     let(:tenant_names){ 3.times.map{ Apartment::Test.next_db } }
     let(:tenant_count){ tenant_names.length }
 
     before do
       allow(Apartment).to receive(:tenant_names).and_return tenant_names
+    end
+
+    describe "apartment:drop" do
+      before do
+        allow(ActiveRecord::Migrator).to receive(:drop)
+      end
+
+      it "should drop public and all multi-tenant dbs" do
+        expect(Apartment::Tenant).to receive(:drop).exactly(tenant_count).times
+        @rake['apartment:drop'].invoke
+      end
+    end
+
+    describe "apartment:reset" do
+      before do
+        allow(ActiveRecord::Migrator).to receive(:drop)
+        allow(ActiveRecord::Migrator).to receive(:create)
+        allow(ActiveRecord::Migrator).to receive(:migrate)
+      end
+
+      it "should reset public and all multi-tenant dbs" do
+        p tenant_names
+        expect(Apartment::Tenant).to receive(:drop).exactly(1).times
+        expect(Apartment::Tenant).to receive(:create).exactly(1).times
+        expect(Apartment::Tenant).to receive(:migrate).exactly(0).times
+        @rake['apartment:reset'].invoke
+      end
     end
 
     describe "apartment:migrate" do
@@ -116,5 +145,10 @@ describe "apartment rake tasks" do
         @rake['apartment:rollback'].invoke
       end
     end
+  end
+
+  context "database creation" do
+    let(:tenant_names){ 3.times.map{ Apartment::Test.next_db } }
+    let(:tenant_count){ tenant_names.length }
   end
 end
