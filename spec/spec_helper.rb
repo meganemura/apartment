@@ -16,6 +16,7 @@ Apartment.excluded_models.each do |model|
   klass.reset_table_name
 end
 
+require 'minitest/spec'
 require "rspec/rails"
 require 'capybara/rspec'
 require 'capybara/rails'
