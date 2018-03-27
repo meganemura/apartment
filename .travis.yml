@@ -23,6 +23,15 @@ matrix:
   allow_failures:
     - rvm: ruby-head
     - gemfile: gemfiles/rails_master.gemfile
+  include:
+    - rvm: 2.4.3
+      gemfile: gemfiles/rails_5_1.gemfile
+      addons:
+        postgresql: 9.4
+    - rvm: 2.4.3
+      gemfile: gemfiles/rails_5_1.gemfile
+      addons:
+        postgresql: 9.5
   exclude:
     - rvm: 2.1.9
       gemfile: gemfiles/rails_5_0.gemfile
