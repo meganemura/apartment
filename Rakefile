@@ -7,7 +7,7 @@ require 'appraisal'
 require "rspec"
 require "rspec/core/rake_task"
 
-RSpec::Core::RakeTask.new(:spec => %w{ db:copy_credentials db:test:prepare }) do |spec|
+RSpec::Core::RakeTask.new(:spec => %w{ db:copy_credentials db:test:dummy:environment db:test:prepare }) do |spec|
   spec.pattern = "spec/**/*_spec.rb"
   # spec.rspec_opts = '--order rand:47078'
 end
@@ -31,6 +31,11 @@ task :default => :spec
 
 namespace :db do
   namespace :test do
+    # Requiring environment invokes config.to_prepare block defined in railtie.
+    task 'dummy:environment' do
+      require File.expand_path('../spec/dummy/config/environment', __FILE__)
+    end
+
     task :prepare => %w{postgres:drop_db postgres:build_db mysql:drop_db mysql:build_db}
   end
 
